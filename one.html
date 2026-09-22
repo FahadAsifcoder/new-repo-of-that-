@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>For Laila ❤️</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Georgia", serif;
+      background: linear-gradient(135deg, #fff0f3, #ffd6df, #fff5f7);
+      color: #5a1f2b;
+      overflow-x: hidden;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: fixed;
+      bottom: -30px;
+      color: #e63963;
+      font-size: 20px;
+      animation: floatHeart 8s linear infinite;
+      opacity: 0.6;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes floatHeart {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+
+      20% {
+        opacity: 0.7;
+      }
+
+      100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Opening */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card {
+      max-width: 700px;
+      width: 100%;
+      padding: 55px 30px;
+      border-radius: 35px;
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 20px 60px rgba(128, 20, 50, 0.18);
+      border: 1px solid rgba(255,255,255,0.8);
+    }
+
+    .small-heart {
+      font-size: 55px;
+      animation: heartbeat 1.5s infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.18);
+      }
+    }
+
+    h1 {
+      font-size: clamp(38px, 8vw, 70px);
+      margin: 20px 0;
+      color: #9e2748;
+    }
+
+    .subtitle {
+      font-size: 21px;
+      line-height: 1.8;
+      margin-bottom: 35px;
+      color: #713242;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      padding: 15px 35px;
+      border-radius: 50px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      font-family: inherit;
+    }
+
+    .yes {
+      background: linear-gradient(135deg, #e63963, #b81745);
+      color: white;
+      box-shadow: 0 10px 25px rgba(190, 25, 70, 0.3);
+    }
+
+    .yes:hover {
+      transform: translateY(-4px) scale(1.04);
+    }
+
+    .maybe {
+      background: white;
+      color: #a52a4c;
+      border: 1px solid #f0a7b8;
+    }
+
+    .maybe:hover {
+      transform: translateY(-4px);
+    }
+
+    /* Music button */
+    .music-control {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      display: none;
+    }
+
+    .music-control button {
+      padding: 12px 18px;
+      background: rgba(255,255,255,0.9);
+      color: #9e2748;
+      font-size: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+    }
+
+    /* Love reveal */
+    #loveMessage {
+      display: none;
+    }
+
+    .reveal {
+      animation: reveal 1.5s ease forwards;
+    }
+
+    @keyframes reveal {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .love-intro {
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 25px;
+      background: linear-gradient(
+        rgba(255, 235, 241, 0.85),
+        rgba(255, 213, 224, 0.95)
+      );
+    }
+
+    .love-intro h2 {
+      font-size: clamp(35px, 7vw, 65px);
+      color: #9e2748;
+      margin-bottom: 25px;
+    }
+
+    .love-intro p {
+      font-size: 22px;
+      line-height: 2;
+      max-width: 750px;
+      margin: auto;
+    }
+
+    /* Memories */
+    .memories {
+      padding: 100px 7%;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: clamp(32px, 5vw, 50px);
+      color: #9e2748;
+      margin-bottom: 15px;
+    }
+
+    .section-subtitle {
+      font-size: 18px;
+      margin-bottom: 50px;
+      color: #7d4654;
+    }
+
+    .memory-grid {
+      max-width: 1100px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .memory {
+      background: rgba(255,255,255,0.75);
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(112, 27, 49, 0.12);
+      transition: 0.4s;
+    }
+
+    .memory:hover {
+      transform: translateY(-10px);
+    }
+
+    .memory img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .memory-text {
+      padding: 25px;
+    }
+
+    .memory-text h3 {
+      color: #a52a4c;
+      margin-bottom: 12px;
+      font-size: 24px;
+    }
+
+    .memory-text p {
+      line-height: 1.8;
+      color: #70404c;
+    }
+
+    /* Love letter */
+    .letter {
+      padding: 100px 25px;
+      background: #fff7f9;
+      text-align: center;
+    }
+
+    .letter-box {
+      max-width: 800px;
+      margin: auto;
+      padding: 55px 35px;
+      border-radius: 30px;
+      background: linear-gradient(145deg, #fff, #fff0f4);
+      box-shadow: 0 20px 60px rgba(130, 28, 55, 0.12);
+    }
+
+    .letter-box p {
+      font-size: 20px;
+      line-height: 2;
+      margin-bottom: 20px;
+    }
+
+    .signature {
+      margin-top: 35px;
+      font-size: 25px;
+      color: #a52a4c;
+      font-style: italic;
+    }
+
+    /* Final */
+    .final {
+      min-height: 80vh;
+      padding: 100px 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background:
+        radial-gradient(circle at top, #ffb6c9, transparent 45%),
+        linear-gradient(135deg, #8e173b, #4e1026);
+      color: white;
+    }
+
+    .final-content {
+      max-width: 800px;
+    }
+
+    .final h2 {
+      font-size: clamp(42px, 8vw, 75px);
+      margin-bottom: 30px;
+    }
+
+    .final p {
+      font-size: 21px;
+      line-height: 2;
+      color: #ffe8ee;
+    }
+
+    .final-heart {
+      font-size: 70px;
+      margin-bottom: 20px;
+      animation: heartbeat 1.5s infinite;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      background: #390b1c;
+      color: #f7b9c8;
+      font-size: 14px;
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      .card {
+        padding: 45px 20px;
+      }
+
+      .subtitle {
+        font-size: 18px;
+      }
+
+      .love-intro p,
+      .letter-box p,
+      .final p {
+        font-size: 18px;
+      }
+
+      .memory img {
+        height: 280px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Romantic music -->
+  <!-- Replace romantic-song.mp3 with your own licensed/local music file -->
+  <audio id="romanticMusic" loop>
+    <source src="romantic-song.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Music control -->
+  <div class="music-control" id="musicControl">
+    <button onclick="toggleMusic()" id="musicButton">
+      🔊 Music On
+    </button>
+  </div>
+
+  <!-- Floating hearts -->
+  <div class="heart" style="left:8%; animation-delay:0s;">❤️</div>
+  <div class="heart" style="left:20%; animation-delay:2s;">💗</div>
+  <div class="heart" style="left:35%; animation-delay:4s;">💕</div>
+  <div class="heart" style="left:55%; animation-delay:1s;">❤️</div>
+  <div class="heart" style="left:75%; animation-delay:3s;">💖</div>
+  <div class="heart" style="left:90%; animation-delay:5s;">💗</div>
+
+
+  <!-- FIRST SCREEN -->
+  <section class="hero">
+
+    <div class="card">
+
+      <div class="small-heart">❤️</div>
+
+      <h1>Laila...</h1>
+
+      <p class="subtitle">
+        I have something I've wanted to ask you for a long time...
+        <br><br>
+        <strong>Do you love me?</strong>
+      </p>
+
+      <div class="buttons">
+
+        <button class="yes" onclick="sayYes()">
+          Yes ❤️
+        </button>
+
+        <button class="maybe" onclick="sayMaybe()">
+          Maybe... 🙈
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- EVERYTHING AFTER YES -->
+  <div id="loveMessage">
+
+    <!-- Love reveal -->
+    <section class="love-intro reveal">
+
+      <div>
+
+        <div class="final-heart">❤️</div>
+
+        <h2>I knew it...</h2>
+
+        <p>
+          I know you love me,
+          and I want you to know something too...
+          <br><br>
+
+          <strong>
+            I love you too, Laila.
+          </strong>
+
+          <br><br>
+
+          Maybe words can never completely explain
+          what you mean to me, but every little moment
+          with you feels special.
+        </p>
+
+        <br>
+
+        <p>
+          ↓ Scroll down, my love ↓
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- Memories -->
+    <section class="memories">
+
+      <h2 class="section-title">
+        Our Little World ❤️
+      </h2>
+
+      <p class="section-subtitle">
+        Some moments become memories... and some memories become forever.
+      </p>
+
+
+      <div class="memory-grid">
+
+        <div class="memory">
+
+          <img
+            src="smile.jpeg"
+            alt="Romantic couple"
+          >
+
+          <div class="memory-text">
+
+            <h3>Your Smile</h3>
+
+            <p>
+              Your smile has a way of making even an ordinary day
+              feel beautiful. It is one of my favorite things about you.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="memory">
+
+          <img
+            src="first.jpeg"
+            alt="Couple together"
+          >
+
+          <div class="memory-text">
+
+            <h3>Being Together</h3>
+
+            <p>
+              I don't need a perfect place or a perfect day.
+              If you're beside me, somehow everything feels right.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="memory">
+
+          <img
+            src="second.jpeg"
+            alt="Couple holding hands"
+          >
+
+          <div class="memory-text">
+
+            <h3>Little Moments</h3>
+
+            <p>
+              The little conversations, the laughter,
+              the silly moments and even the quiet ones —
+              I want to remember them all.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="memory">
+
+          <img
+            src="third.jpeg"
+            alt="Romantic couple"
+          >
+
+          <div class="memory-text">
+
+            <h3>My Favorite Person</h3>
+
+            <p>
+              Out of all the people in this world,
+              somehow my heart found you.
+              And I'm so grateful that it did.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Love letter -->
+    <section class="letter">
+
+      <div class="letter-box">
+
+        <h2 class="section-title">
+          A Little Something For You 💌
+        </h2>
+
+        <p>
+          Laila, you are more than just someone I love.
+          You are a beautiful part of my life.
+        </p>
+
+        <p>
+          Thank you for every smile, every conversation,
+          every laugh, every little moment and every memory.
+        </p>
+
+        <p>
+          I don't know what the future will bring,
+          but I know that every moment with you
+          is something I will always treasure.
+        </p>
+
+        <p>
+          Whenever life gets difficult, I hope you remember
+          that there is someone who thinks you are incredibly
+          special.
+        </p>
+
+        <div class="signature">
+          Always yours ❤️
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Final message -->
+    <section class="final">
+
+      <div class="final-content">
+
+        <div class="final-heart">❤️</div>
+
+        <h2>
+          You Are Special To Me, Laila
+        </h2>
+
+        <p>
+          I love you so much. ❤️
+        </p>
+
+        <br>
+
+        <p>
+          Thank you for coming into my life,
+          for making me smile,
+          for giving me beautiful memories,
+          and simply for being you.
+        </p>
+
+        <br>
+
+        <p>
+          No matter how many words I write,
+          they will never be enough to explain
+          how much you mean to me.
+        </p>
+
+        <br>
+
+        <p>
+          <strong>
+            Thank you for being my Laila. ❤️
+          </strong>
+        </p>
+
+      </div>
+
+    </section>
+
+    <footer>
+      Made with love, just for Laila ❤️
+    </footer>
+
+  </div>
+
+
+  <script>
+
+    const music = document.getElementById("romanticMusic");
+    const musicControl = document.getElementById("musicControl");
+    const musicButton = document.getElementById("musicButton");
+
+    function sayYes() {
+
+      // Start music only after the user interacts.
+      music.play().catch(() => {
+        console.log("Music could not start.");
+      });
+
+      musicControl.style.display = "block";
+
+      document.getElementById("loveMessage").style.display = "block";
+
+      // Scroll to the love message.
+      setTimeout(() => {
+        document.getElementById("loveMessage").scrollIntoView({
+          behavior: "smooth"
+        });
+      }, 300);
+
+      createHearts();
+    }
+
+
+    function sayMaybe() {
+
+      alert(
+        "Take your time, Laila... ❤️\n\n" +
+        "But somewhere in my heart, I am hoping your answer is YES. 🥰"
+      );
+
+    }
+
+
+    function toggleMusic() {
+
+      if (music.paused) {
+
+        music.play();
+
+        musicButton.innerHTML = "🔊 Music On";
+
+      } else {
+
+        music.pause();
+
+        musicButton.innerHTML = "🔇 Music Off";
+
+      }
+
+    }
+
+
+    function createHearts() {
+
+      for (let i = 0; i < 25; i++) {
+
+        const heart = document.createElement("div");
+
+        heart.className = "heart";
+
+        heart.innerHTML =
+          ["❤️", "💗", "💕", "💖", "💘"][Math.floor(Math.random() * 5)];
+
+        heart.style.left = Math.random() * 100 + "%";
+
+        heart.style.animationDuration =
+          (5 + Math.random() * 6) + "s";
+
+        heart.style.animationDelay =
+          Math.random() * 4 + "s";
+
+        document.body.appendChild(heart);
+
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>
